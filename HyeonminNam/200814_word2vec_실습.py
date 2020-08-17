@@ -26,15 +26,18 @@ class word2vec() :
         Y = []
         for idx in range(len(onehot_array)):
             target = onehot_array[idx]
+            print(idx)
             for w in range(1, window+1):
-                try:
+                if idx-w >= 0:
                     X.append(onehot_array[idx-w])
                     Y.append(target)
-                except:
+                    print(idx-w)
+                else:
                     pass
                 try:
                     X.append(onehot_array[idx+w])
                     Y.append(target)
+                    print(idx+w)
                 except:
                     pass
         return np.asarray(X), np.asarray(Y)
