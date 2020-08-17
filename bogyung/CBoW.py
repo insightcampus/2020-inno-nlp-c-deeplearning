@@ -112,11 +112,10 @@ class CBoW:
             word_1 = np.where(self.token == self.words[i])
             word_2 = np.where(self.token == self.words[i+1])
             word_3 = np.where(self.token == self.words[i+2])
-            word_4 = np.where(self.token == self.words[i+3])
             w = self.W1[word_1] - self.W1[word_2] + self.W1[word_3]
 
             simmilar_w = []
-            for j, t in enumerate(self.token):
+            for j in range(len(self.token)):
                 tmp = np.dot(w, self.W1[j]) / np.linalg.norm(w) * np.linalg.norm(self.W1[j])
                 simmilar_w.append(tmp)
             acc += (self.token[np.argmax(simmilar_w)] == self.words[i+3]) * 1
@@ -127,7 +126,7 @@ class CBoW:
 
 if __name__ == "__main__":
     doc = "you will never know until you try."
-    cb = CBoW(doc, 4, 2, 0.01, 100)
+    cb = CBoW(doc, 4, 2, 0.01, 10000)
     
     cb.optimize()
     cb.plot()
