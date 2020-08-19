@@ -107,7 +107,7 @@ class Word2Vec():
     def most_similar(self, w, n = 3):
         v = self.wv(w)
 
-        return np.dot(v, self.WV)
+        return np.dot(v, self.WV.T)
 
 if __name__ == "__main__" :
     docs = ["you will never know until you try"]
